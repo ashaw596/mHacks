@@ -5,8 +5,8 @@ class Point{
 	private $yCoord;
 	
 	function __construct($x,$y){
-    $this -> xCoord = $x;
-    $this -> yCoord = $y;
+    $this -> xCoord = round($x);
+    $this -> yCoord = round($y);
 	
 	}
 	
@@ -20,16 +20,16 @@ class Point{
 	
 	public function getX(){
 		$toReturn = 0;
-		if (isset($xCoord)) {
-			$ToReturn = xCoord;
+		if (isset($this->xCoord)) {
+			return $this->xCoord;
 		}
 		return $toReturn;
 	}
 	
 	public function getY(){
 		$toReturn = 0;
-		if (isset($xCoord)) {
-			$ToReturn = xCoord;
+		if (isset($this->yCoord)) {
+			return $this->yCoord;
 		}
 		return $toReturn;
 	}
