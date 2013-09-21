@@ -44,7 +44,7 @@ class ImageFile
             case "image/png":
                 return  imagecreatefrompng ($this -> file ["tmp_name"]);
                 break;
-            case: "image/gif":
+            case "image/gif":
                 return  imagecreatefromgif($this -> file ["tmp_name"]);
                 break;
             default:
