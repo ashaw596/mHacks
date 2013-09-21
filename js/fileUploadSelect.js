@@ -5,6 +5,7 @@ $(function() {
 });
 var headerHeight = 0;
 var imageScaleWidth = 500;
+var imageScale;
 var img = new Image();
 var imageLoader = document.getElementById('imageLoader');
     imageLoader.addEventListener('change', handleImage, false);
@@ -31,13 +32,14 @@ function draw(event) {
 		ctx.clearRect(0,0,canvas.width,canvas.height);
 	}
 function start(event) {
-
+    
    // startx = getX(event);
    // starty = getY(event);
     skinX[setting] = getX(event);
     skinY[setting] = getY(event);
 
-    document.getElementById("skin" + setting).innerHTML = skinX[setting] + ", " + skinY[setting] ;
+    $("#skinX" + setting).val(skinX[setting] / imageScale );
+    $("#skinY" + setting).val(skinY[setting] / imageScale );
        
     setting++;
     isDrawing = true;
@@ -87,6 +89,8 @@ function handleImage(e){
     reader.onload = function(event){
         
         img.onload = function(){
+            imageScaleWidth = Math.min(imageScaleWidth,img.width);
+            imageScale = imageScaleWidth/img.height;
             canvas.width = imageScaleWidth;
             canvas.height = imageScaleWidth * img.height / img.width;
             ctx.drawImage(img,0,0,imageScaleWidth,imageScaleWidth * img.height / img.width);

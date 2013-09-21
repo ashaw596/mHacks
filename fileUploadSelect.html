@@ -8,22 +8,24 @@
 
 
 <center><canvas id="imageCanvas"></canvas></center>
-<form action="testUploadEdit.php" method="post" enctype="multipart/form-data" >
+<form action="testUploadSelect.php" method="post" enctype="multipart/form-data" >
 <label for="file">Filename:</label>
 <input type="file" accept="image/*;capture=camera" name="imageLoader" id="imageLoader"><br>
-<input type="text" name="length"></input>
-<input type="submit" name="submit" value="Submit">
-</form>
+Length of Calibration Stick: <input type="text" name="length"></input>
+
+
 
 <table>
-    <tr><td><label> Normal Skin </label></td><td> <span id="skin0" > </span></td></tr>
-    <tr><td><label> First Degree Burn </label></td><td><span id="skin1" > </span></td></tr>
-    <tr><td><label> Second Degree Burn </label></td><td> <span id="skin2" > </span></td></tr>
-    <tr><td><label> Third Degree Burn </label></td><td> <span id="skin3" > </span></td></tr>
-    <tr><td><label> Start coordinate </label></td><td> <span id="skin4" > </span></td></tr>
-    <tr><td><label> End Coordinate </label></td><td> <span id="skin5" > </span></td></tr>
+    <tr><td><label> Normal Skin </label></td><td> <input type="text" name="skinX0" id="skinX0" > </input><input type="text" name="skinY0" id="skinY0" > </input></td></tr>
+    <tr><td><label> First Degree Burn </label></td><td><input type="text" name="skinX1" id="skinX1" > </input><input type="text" name="skinY1" id="skinY1" > </input></td></tr>
+    <tr><td><label> Second Degree Burn </label></td><td> <input type="text" name="skinX2" id="skinX2" > </input><input type="text" name="skinY2" id="skinY2" > </input></td></tr>
+    <tr><td><label> Third Degree Burn </label></td><td> <input type="text" name="skinX3" id="skinX3" > </input><input type="text" name="skinY3" id="skinY3" > </input></td></tr>
+    <tr><td><label> Start coordinate </label></td><td> <input type="text" name="skinX4" id="skinX4" > </input><input type="text" name="skinY4" id="skinY4" > </input></td></tr>
+    <tr><td><label> End Coordinate </label></td><td> <input type="text" name="skinX5" id="skinX5" > </input><input type="text" name="skinY5" id="skinY5" > </input></td></tr>
 </table>
 
+<input type="submit" name="submit" value="Submit">
+</form>
 <script src="/mhacks/js/fileUploadSelect.js"></script>
 </body>
 </html>
