@@ -1,0 +1,27 @@
+<html>
+<head>
+<script src=http://code.jquery.com/jquery-1.10.2.min.js"> </script>
+</head>
+
+<body>
+
+
+
+<canvas id="imageCanvas"></canvas>
+<form action="testUploadEdit.php" method="post" enctype="multipart/form-data" >
+<label for="file">Filename:</label>
+<input type="file" accept="image/*;capture=camera" name="imageLoader" id="imageLoader"><br>
+
+<input type="submit" name="submit" value="Submit">
+</form>
+
+<table>
+    <tr><td><label> Normal Skin </label></td><td> <span id="skin0" > </span></td></tr>
+    <tr><td><label> First Degree Burn </label></td><td><span id="skin1" > </span></td></tr>
+    <tr><td><label> Second Degree Burn </label></td><td> <span id="skin2" > </span></td></tr>
+    <tr><td><label> Third Degree Burn </label></td><td> <span id="skin3" > </span></td></tr>
+</table>
+
+<script src="/mhacks/js/fileUploadSelect.js"></script>
+</body>
+</html>
