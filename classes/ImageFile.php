@@ -1,8 +1,13 @@
 <?php
 class ImageFile
 {
-    public $file; //Array with name,type,size,tmp_name keys. Read from $_FILES["file"]
     
+    public $name; //name of file
+    public $type; //Mime of file
+    public $size; //size of file
+    public $tmp_name; //tmp_name of file
+    public $x;
+    public $y;
     function __construct($inputFile) //Array with name,type,size,tmp_name keys. Read from $_FILES["file"]
     {
         if(is_array($inputFile))
@@ -12,7 +17,19 @@ class ImageFile
                 
                 if(is_uploaded_file($inputFile["tmp_name"]))
                 {
-                    $this -> file = $inputFile;
+                    $this -> name = $inputFile["name"];
+                    $this -> type = $inputFile["type"];
+                    $this -> size = $inputFile["size"];
+                    $this -> tmp_name = $inputFile["tmp_name"];
+                    
+                    $imageSize = getimagesize ($this -> tmp_name);
+                    if(!$imageSize)
+                    {
+                        throw new Exception('Image Conversion Failure');  
+                    }
+                    $this -> x = $imageSize[0];
+                    $this -> y = $imageSize[1];
+                    
                 }
                 else
                 
@@ -31,29 +48,32 @@ class ImageFile
         }
     }
     
-    function toImage() //returns image;
+    function toGDImage() //returns image;
     {
-        $finfo = finfo_open(FILEINFO_MIME_TYPE);
         
-        switch ( strtolower (finfo_file($finfo, $this -> file ["tmp_name"])))
+        
+        switch ( strtolower ($this -> type))
         {
             case "image/jpeg":
             case "image/pjpeg":
-                return  imagecreatefromjpeg ($this -> file ["tmp_name"]);
+                return  imagecreatefromjpeg ($this -> tmp_name);
                 break;
             case "image/png":
-                return  imagecreatefrompng ($this -> file ["tmp_name"]);
+                return  imagecreatefrompng ($this -> tmp_name);
                 break;
             case "image/gif":
-                return  imagecreatefromgif($this -> file ["tmp_name"]);
+                return  imagecreatefromgif($this -> tmp_name);
                 break;
             default:
                 throw new Exception('Image Conversion Failure');  
                 return false;
                 break;
         }
-        finfo_close($finfo);
     }
+    
+   
+    
+
 }
 
 
