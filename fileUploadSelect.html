@@ -7,11 +7,11 @@
 
 
 
-<canvas id="imageCanvas"></canvas>
+<center><canvas id="imageCanvas"></canvas></center>
 <form action="testUploadEdit.php" method="post" enctype="multipart/form-data" >
 <label for="file">Filename:</label>
 <input type="file" accept="image/*;capture=camera" name="imageLoader" id="imageLoader"><br>
-
+<input type="text" name="length"></input>
 <input type="submit" name="submit" value="Submit">
 </form>
 
@@ -20,6 +20,8 @@
     <tr><td><label> First Degree Burn </label></td><td><span id="skin1" > </span></td></tr>
     <tr><td><label> Second Degree Burn </label></td><td> <span id="skin2" > </span></td></tr>
     <tr><td><label> Third Degree Burn </label></td><td> <span id="skin3" > </span></td></tr>
+    <tr><td><label> Start coordinate </label></td><td> <span id="skin4" > </span></td></tr>
+    <tr><td><label> End Coordinate </label></td><td> <span id="skin5" > </span></td></tr>
 </table>
 
 <script src="/mhacks/js/fileUploadSelect.js"></script>

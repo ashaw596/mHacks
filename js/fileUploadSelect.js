@@ -3,7 +3,7 @@ $(function() {
 
 	
 });
-
+var headerHeight = 0;
 var imageScaleWidth = 500;
 var img = new Image();
 var imageLoader = document.getElementById('imageLoader');
@@ -34,6 +34,12 @@ function start(event) {
 
    // startx = getX(event);
    // starty = getY(event);
+    skinX[setting] = getX(event);
+    skinY[setting] = getY(event);
+
+    document.getElementById("skin" + setting).innerHTML = skinX[setting] + ", " + skinY[setting] ;
+       
+    setting++;
     isDrawing = true;
     event.preventDefault();
 }
@@ -41,12 +47,7 @@ function stop(event) {
  
     if(isDrawing) {
        
-       skinX[setting] = getX(event);
-       skinY[setting] = getY(event);
 
-       document.getElementById("skin" + setting).innerHTML = skinX[setting] + ", " + skinY[setting] ;
-       
-       setting++;
         isDrawing = false;
     }
     event.preventDefault();
@@ -62,9 +63,9 @@ function init() {
 }
 
 function getX(event) {
-
+    
 		if(event.type.contains("touch")) {
-			return event.targetTouches[0].pageX;
+			return event.targetTouches[0].pageX-canvas.position().left;
 		}
 		else {
 			return event.layerX;
@@ -74,7 +75,7 @@ function getX(event) {
 function getY(event) {
  
     if(event.type.contains("touch")) {
-        return event.targetTouches[0].pageY-headerHeight;
+        return event.targetTouches[0].pageY-canvas.position().top;
     }
     else {
        return event.layerY;
