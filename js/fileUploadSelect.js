@@ -1,3 +1,9 @@
+$(function() {
+	String.prototype.contains = function(it) { return this.indexOf(it) != -1; };
+
+	
+});
+
 var imageScaleWidth = 500;
 var img = new Image();
 var imageLoader = document.getElementById('imageLoader');
@@ -25,18 +31,21 @@ function draw(event) {
 		ctx.clearRect(0,0,canvas.width,canvas.height);
 	}
 function start(event) {
-    
+
    // startx = getX(event);
    // starty = getY(event);
     isDrawing = true;
     event.preventDefault();
 }
 function stop(event) {
+ 
     if(isDrawing) {
-    
+       
        skinX[setting] = getX(event);
        skinY[setting] = getY(event);
+
        document.getElementById("skin" + setting).innerHTML = skinX[setting] + ", " + skinY[setting] ;
+       
        setting++;
         isDrawing = false;
     }
@@ -53,22 +62,22 @@ function init() {
 }
 
 function getX(event) {
-return event.layerX;
+
 		if(event.type.contains("touch")) {
 			return event.targetTouches[0].pageX;
 		}
 		else {
-			
+			return event.layerX;
 		}
 	}
 	
 function getY(event) {
- return event.layerY;
+ 
     if(event.type.contains("touch")) {
         return event.targetTouches[0].pageY-headerHeight;
     }
     else {
-       
+       return event.layerY;
     }
 }
 function handleImage(e){
