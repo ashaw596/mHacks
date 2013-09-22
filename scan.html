@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <title>Scan</title>
+  <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+  <link href="css/bootstrap.min.css" rel = "stylesheet">
+  <link href="css/bootstrap-fileupload.css" rel="stylesheet" type="text/css" >
+  <link href="css/justified-nav.css" rel="stylesheet"> 
+  <script>
+  function switchDisplay()
+  {
+    $("#container1").show();
+
+    $("#container2").hide();
+  }
+  </script>
+</head>
+
+<body>
+<div class="container">
+    <div class="masthead">
+      <img src="img/facebooklogo.jpg" height="40" align="right">
+      <img src="img/twitterlogo.jpg" height="40" align="right">
+      <img src="img/rsslogo.png" height="40" align="right">
+      <h1> Burnize </h1> 
+      <ul class="nav nav-justified">
+       <li><a href="index.html">Home</a></li>
+       <li class="active"><a href="scan.html">Scan</a></li>
+       <li><a href="about.html">About</a></li>
+       <li><a href="#">Contact</a></li>
+     </ul>
+   </div>
+ </div>
+
+<div class="container-fluid" style="display: none" id="container1">
+  <div class= "jumbotron">
+    <center><h1>Fix Image</h1></center>
+  </br>
+  <img src="image/whiteimage.gif" alt="Big Boat" width="400" height="400" align="center" >
+</div>
+</div>
+
+
+<div class="container-fluid"  id="container2" >
+  <div class= "jumbotron">
+    <center><h1>Options</h1></center>
+  </br>
+  <div class="accordion" id="accordion2">
+    <div class="accordion-group">  
+      <div class="accordion-heading">  
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">  
+         Burns
+       </a>  
+     </div>  
+     <div id="collapseOne" class="accordion-body collapse">  
+      <div class="accordion-inner">  
+        Extend for mroe information.
+        <div class="btn-group">
+          <button type="button" class="btn btn-default" onclick="switchDisplay()">button</Submit></button>
+        </div>
+      </div>  
+    </div>  
+    <div class="accordion-group">  
+      <div class="accordion-heading">  
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">  
+         Melanoma 
+       </a>  
+     </div>  
+     <div id="collapseTwo" class="accordion-body collapse">  
+      <div class="accordion-inner">  
+        Extend for mroe information. 
+        <div class="btn-group">
+          <button type="button" class="btn btn-default" onclick="switchDisplay()">button</Submit></button>
+        </div>
+      </div>  
+    </div>  
+    <div class="accordion-group">  
+      <div class="accordion-heading">  
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">  
+         Other
+       </a>  
+     </div>  
+     <div id="collapseThree" class="accordion-body collapse">  
+      <div class="accordion-inner">  
+        Extend for mroe information.
+        <div class="btn-group">
+          <button type="button" class="btn btn-default" onclick="switchDisplay()">button</Submit></button>
+        </div>
+      </div>  
+    </div>  
+  </div>
+</div>
+</div>
+
+ <div class="modal fade" id="contact" role = "dialog">
+    <div class= "modal-dialog">
+    </div>
+  </div>
+
+  <div class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+      <p class="navbar-text pull-left">Site build by MHacks---Team-Dorito</p>
+      <a href ="#" class="navbar-button btn-info btn pull-right">Join us!</a>
+    </div>
+  </div>
+
+  <script src="js/jquery.js"></script>
+  <script src="js/bootstrap.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/bootstrap-fileupload.js"></script>
+  <script src="js/bootstrap-collapse.js"></script>
+
+</body>
+</html>
