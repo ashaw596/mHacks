@@ -45,6 +45,8 @@
         }
         else
         {
+             $skinX[$i] = "";
+             $skinY[$i]= "";
             $isEnabled[$i] = false;
         }
         
