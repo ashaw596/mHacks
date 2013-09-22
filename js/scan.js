@@ -103,7 +103,7 @@ function start(event) {
         calX[setting] = getX(event);
         calY[setting] = getY(event);
         $("#calX" + setting).val(Math.round(calX[setting] / imageScale ));
-        $("#calY" + setting).val(Math.round(calX[setting] / imageScale ));
+        $("#calY" + setting).val(Math.round(calY[setting] / imageScale ));
         ctx.lineTo(calX[setting],calY[setting]);
         ctx.stroke();
         
