@@ -1,7 +1,33 @@
-<html>
-<head>
-</head>
-<body>
+ <!DOCTYPE html>
+ <html>
+ <head>
+ 	<title>Results</title>
+ 	<meta name ="viewport" content="width=device-width, initial-scale =1.0">
+ 	<link href="css/styles.css" rel = "stylesheet">
+ 	<link rel="stylesheet" type="text/css" href="css/bootstrap-fileupload.css">
+ 	<link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+ 	<link href="css/bootstrap.min.css" rel = "stylesheet">
+ 	<link href="css/justified-nav.css" rel="stylesheet">
+ </head>
+
+ <body>
+ 	<div class="container">
+ 		<div class="masthead">
+      			<img src="img/facebooklogo.jpg" height="40" align="right">
+      			<img src="img/twitterlogo.jpg" height="40" align="right">
+      			<img src="img/rsslogo.png" height="40" align="right">
+      			<h1> Burnize </h1> 
+      			<ul class="nav nav-justified">
+       				<li class="active"><a href="index.html">Home</a></li>
+       				<li><a href="scan.html">Scan</a></li>
+       				<li><a href="about.html">About</a></li>
+       				<li><a href="#">Contact</a></li>
+     			</ul>
+   		</div>
+ 	</div>
+
+ 	
+
 <?php
     require_once("classes/ImageFile.php");
 	require_once("classes/Point.php");
@@ -37,10 +63,7 @@
     }
     else
     {
-        echo "Upload: " . $_FILES["imageLoader"]["name"] . "<br>";
-        echo "Type: " . $_FILES["imageLoader"]["type"] . "<br>";
-        echo "Size: " . ($_FILES["imageLoader"]["size"] / 1024) . " kB<br>";
-        echo "Stored in: " . $_FILES["imageLoader"]["tmp_name"] . "<br />";
+
         
         
         
@@ -50,23 +73,11 @@
             $imageFile = new ImageFile($_FILES["imageLoader"]);
             $image = $imageFile->toGDImage();
 
-			echo $image;
             
             $imageX = $imageFile -> x;
             $imageY = $imageFile -> y;
             
             
-            echo "<canvas id=\"myCanvas\" width=\"$imageX\" height=\"$imageY\"></canvas>";
-            echo "<script>
-                  var canvas = document.getElementById('myCanvas');
-                  var context = canvas.getContext('2d');
-                  var imageObj = new Image();
-
-                  imageObj.onload = function() {
-                    context.drawImage(imageObj);
-                  };
-                  imageObj.src = '"."';
-                  </script>";
 			$normalSkin = new Point($skinX[0], $skinY[0]);
 			$firstDegBurn = new Point($skinX[1], $skinY[1]);
 			$secondDegBurn = new Point($skinX[2], $skinY[2]);
@@ -89,10 +100,13 @@
 			$thirdDegreeAnswer = $monteCarlo->getThirdDegreeArea();
 			$totalDegreeAnswer = $monteCarlo->getTotalBurnArea();
 			
+			ob_start();
+            imagepng($image);
+            // Capture the output
+            $imagedata = ob_get_contents();
+            // Clear the output buffer
+            ob_end_clean();
 			
-			echo $firstDegreeAnswer."<br />";
-			echo $secondDegreeAnswer."<br />";
-			echo $thirdDegreeAnswer."<br />";
 
     
             
@@ -109,5 +123,51 @@
   
 
   ?>
-  </body>
-  </html>
+<div class="container">
+ 		<div class= "jumbotron">
+ 			<center><h1>Results</h1></center>
+ 			<table class="table" border = "0">
+ 				<tr>
+
+ 					<td> <img src="<?php echo 'data:image/png;base64,'.base64_encode($imagedata) ;?>" alt="burn image" align="center" style="max-width: 500px;"> </td>
+ 					<td> <p>Here are the areas of your burn according to the photo uploaded.</p>
+
+ 						<span class="label label-success">Area of 1st Degree Burn:</span> 
+                        <br />
+                        <?php echo round($firstDegreeAnswer,2);?> cm<sup>2</sup>
+			
+			
+ 						</br></br></br>
+ 						<span class="label label-warning">Area of 2nd Degree Burn:</span> 
+                        <br />
+                        <?php echo round($secondDegreeAnswer,2); ?> cm<sup>2</sup>
+ 						</br></br></br>
+ 						<span class="label label-danger">Area of 3rd Degree Burn:</span> 
+                        <br />
+                        <?php echo round($thirdDegreeAnswer,2);?> cm<sup>2</sup>
+                        <br />
+ 					</td> 
+ 				</tr>
+ 			</table>
+ 		</div>
+	</div>
+
+ 
+ 
+ 	<div class="modal fade" id="contact" role = "dialog">
+ 		<div class= "modal-dialog">
+ 		</div>
+ 	</div>
+
+ 	<div class="navbar navbar-default navbar-fixed-bottom">
+ 		<div class="container">
+ 			<p class="navbar-text pull-left">Site build by MHacks---Team-Dorito</p>
+ 			<a href ="#" class="navbar-button btn-info btn pull-right">Join us!</a>
+ 		</div>
+ 	</div>
+
+ 	<script src="js/jquery.js"></script>
+  	<script src="js/bootstrap.js"></script>
+ 	<script src="js/bootstrap-fileupload.js"></script>
+ </body>
+ </html>
