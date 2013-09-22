@@ -1,8 +1,8 @@
  <!DOCTYPE html>
  <html>
  <head>
- 	<title>Home</title>
- 	<meta name ="viewport" content="width=device-width, initial-scale =1.0">
+  <title>Home</title>
+  <meta name ="viewport" content="width=device-width, initial-scale =1.0">
   <link href="css/bootstrap-fileupload.css" rel="stylesheet" type="text/css" >
   <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
   <link href="css/bootstrap.min.css" rel = "stylesheet">
@@ -12,8 +12,8 @@
 
 
  <body style="">
- 	<div class="container">
- 		<div class="masthead">
+  <div class="container">
+    <div class="masthead">
       <img src="img/facebooklogo.jpg" height="40" align="right">
       <img src="img/twitterlogo.jpg" height="40" align="right">
       <img src="img/rsslogo.png" height="40" align="right">
@@ -22,13 +22,65 @@
        <li class="active"><a href="index.html">Home</a></li>
        <li><a href="scan.html">Scan</a></li>
        <li><a href="about.html">About</a></li>
-       <li><a href="#">Contact</a></li>
+       <li><a href="#myModal" data-toggle="modal">Contact</a>
+       <div class="modal" id="myModal">
+  <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+          <h4 class="modal-title">Contact Us</h4>
+        </div>
+        
+         <div class="modal-body">
+    <!-- The async form to send and replace the modals content with its response -->
+    <form class="form-horizontal well" data-async data-target="#rating-modal" action="/some-endpoint" method="POST">
+     
+                    <label for="name">Name</label>
+                    <input type="text" value="" name="name">
+                    <label for="email">Email</label>
+                    <input type="text" value="@" name="email">
+                    
+    </br></br>
+                    
+    <fieldset>
+    <form method="POST" action=""></form>
+    <label  for="phone">Phone </label>
+    <span>
+      <input name="phonenumber"  size="3" maxlength="3" value="" type="text"> -
+      <label for="">(###)</label>
+    </span>
+    <span>
+      <input id="phonenumber2"  class="element text" size="3" maxlength="3" value="" type="text"> -
+      <label for="element_4_2">###</label>
+    </span>
+    <span>
+      <input id="phonenumber3"  class="element text" size="4" maxlength="4" value="" type="text">
+      <label for="element_4_3">####</label>
+      </br></br>
+      <h4>Leave your feedback!</h4>
+      <textarea class="form-control" rows="3"></textarea>
+      </fieldset>
+
+    </form>
+
+  </div>
+        
+        <div class="modal-footer">
+          <a href="#" data-dismiss="modal" class="btn">Close</a>
+          <a href="#" class="btn btn-primary">Save changes</a>
+        </div>
+      </div>
+    </div>
+</div></li>
      </ul>
    </div>
  </div>
 
+ 
+  
+
 </br></br></br></br></br></br>
- 	<div class="container">
+  <div class="container">
       <div id="myCarousel" class="carousel slide">
         <!-- Indicators -->
         <ol class="carousel-indicators">
@@ -56,7 +108,7 @@
                     <td> <img src="http://images.emedicinehealth.com/images/emedicinehealth/illustrations/rule_of_nines.jpg" style="height: 350px; display: block;"></td>
                     <td> <h1>Did you know?</h1>
                       <p>Doctors currently use the Rule of Nine to determine what percentage of the body is burned. The body is divided into nine different parts
-                        and doctors estimate based on the percentage on every part.</p>
+                        and docturs estimate based on the percentage on every part.</p>
                         <p><a class="btn btn-large btn-primary" href="http://www.emedicinehealth.com/burn_percentage_in_adults_rule_of_nines/article_em.htm">Read More</a>
                       </p>
                     </td>
@@ -87,39 +139,39 @@
       </div><!-- /.carousel -->
     </div>
 
- 	<div class="container">
- 		<div class="row">
- 			<div class="col-md-4">
- 				<h3><a href="#">Skin Burning</a></h3>
- 				<p>A burn is a type of injury to flesh or skin caused by heat, electricity, chemicals, friction, or radiation.[1] Burns that affect only the superficial skin are known as superficial or first-degree burns. When damage penetrates into some of the underlying layers, it is a partial-thickness or second-degree burn. In a full-thickness or third-degree burn, the injury extends to all layers of the skin. A fourth-degree burn additionally involves injury to deeper tissues, such as muscle or bone.--Wikipedia</p>
- 				<a href="#" class= "btn btn-default">Read more!</a>
- 			</div>
- 			<div class="col-md-4">
- 				<h3><a href="#">Skin Cancer</a></h3>
- 				<p>Skin cancers (skin neoplasms) are named after the type of skin cell from which they arise. Basal cell cancer originates from the lowest layer of the epidermis, and is the most common but least dangerous skin cancer. Squamous cell cancer originates from the middle layer, and is less common but more likely to spread and, if untreated, become fatal. Melanoma, which originates in the pigment-producing cells (melanocytes), is the least common, but most aggressive, most likely to spread and, if untreated, become fatal.[1][2]--Wikipedia</p>
- 				<a href="#" class= "btn btn-default">Read more!</a> </br> </br>
- 			</div>
- 			<div class="col-md-4">
- 				<h3><a href="#">Others</a></h3>
- 				<p>Need desciption</p>
- 				<a href="#" class= "btn btn-default">Read more!</a>
- 			</div>
- 		</div>
- 	</div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h3><a href="#">Skin Burning</a></h3>
+        <p>A burn is a type of injury to flesh or skin caused by heat, electricity, chemicals, friction, or radiation.[1] Burns that affect only the superficial skin are known as superficial or first-degree burns. When damage penetrates into some of the underlying layers, it is a partial-thickness or second-degree burn. In a full-thickness or third-degree burn, the injury extends to all layers of the skin. A fourth-degree burn additionally involves injury to deeper tissues, such as muscle or bone.--Wikipedia</p>
+        <a href="#" class= "btn btn-default">Read more!</a>
+      </div>
+      <div class="col-md-4">
+        <h3><a href="#">Skin Cancer</a></h3>
+        <p>Skin cancers (skin neoplasms) are named after the type of skin cell from which they arise. Basal cell cancer originates from the lowest layer of the epidermis, and is the most common but least dangerous skin cancer. Squamous cell cancer originates from the middle layer, and is less common but more likely to spread and, if untreated, become fatal. Melanoma, which originates in the pigment-producing cells (melanocytes), is the least common, but most aggressive, most likely to spread and, if untreated, become fatal.[1][2]--Wikipedia</p>
+        <a href="#" class= "btn btn-default">Read more!</a> </br> </br>
+      </div>
+      <div class="col-md-4">
+        <h3><a href="#">Others</a></h3>
+        <p>Need desciption</p>
+        <a href="#" class= "btn btn-default">Read more!</a>
+      </div>
+    </div>
+  </div>
 
- 	<div class="modal fade" id="contact" role = "dialog">
- 		<div class= "modal-dialog">
- 		</div>
- 	</div>
+  <div class="modal fade" id="contact" role = "dialog">
+    <div class= "modal-dialog">
+    </div>
+  </div>
 
- 	<div class="navbar navbar-default navbar-fixed-bottom">
- 		<div class="container">
- 			<p class="navbar-text pull-left">Site build by MHacks---Team-Dorito</p>
- 			<a href ="#" class="navbar-button btn-info btn pull-right">Join us!</a>
- 		</div>
- 	</div>
+  <div class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+      <p class="navbar-text pull-left">Site build by MHacks---Team-Dorito</p>
+      <a href ="#" class="navbar-button btn-info btn pull-right">Join us!</a>
+    </div>
+  </div>
 
- 	<script src="js/jquery.js"></script>
+  <script src="js/jquery.js"></script>
   <script src="js/bootstrap.js"></script>
 
    <script>
@@ -131,6 +183,6 @@
       }(window.jQuery)
     </script>
     <script src="./Carousel Template · Bootstrap_files/holder.js"></script>
- 	
+  
  </body>
  </html>
