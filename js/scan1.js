@@ -28,18 +28,7 @@ $('#check1').click(function(){
     $('#skinX1').prop('disabled', !isEnabled[1]);
     $('#skinY1').prop('disabled', !isEnabled[1]);
 });
-$('#check2').click(function(){
-    isEnabled[2] = !isEnabled[2];
-    $('#check2').prop('checked', !isEnabled[2]);
-    $('#skinX2').prop('disabled', !isEnabled[2]);
-    $('#skinY2').prop('disabled', !isEnabled[2]);
-});
-$('#check3').click(function(){
-    isEnabled[3] = !isEnabled[3];
-    $('#check3').prop('checked', !isEnabled[3]);
-    $('#skinX3').prop('disabled', !isEnabled[3]);
-    $('#skinY3').prop('disabled', !isEnabled[3]);
-});
+
 
 function draw(event) {
     if(isDrawing) {
@@ -113,7 +102,7 @@ function start(event) {
         ctx.stroke();
         $("#instructions").html("Please click a spot on the picture with normal skin.");
     }
-    else if(setting<6)
+    else if(setting<4)
     {
         var i = setting - 2;
         while(isEnabled[i]==false)
@@ -121,7 +110,7 @@ function start(event) {
             setting++;
             i = setting - 2;
         }
-        if(i<4)
+        if(i<2)
         {
             skinX[i] = getX(event);
             skinY[i] = getY(event);
@@ -136,13 +125,9 @@ function start(event) {
             switch (i)
             {
                 case 0:
-                $("#instructions").html("Please click a spot on the picture with a first degree burn or check the checkbox next to input box if there is no first degree burn in the wound.");
+                $("#instructions").html("Please click a spot on the picture with the texture you wish to investigate");
                 break;
-                case 1:
-                $("#instructions").html("Please click a spot on the picture with a second degree burn or check the checkbox next to the input box if there is no second degree burn in the wound.");
-                break;
-                case 2:
-                 $("#instructions").html("Please click a spot on the picture with a third degree burn or check the checkbox next to the input box if there is no second degree burn in the wound.");
+                default:
                 break;
                 
             }
@@ -204,6 +189,7 @@ function handleImage(e){
             imageScaleWidth = 500
             imageScaleWidth = Math.min(imageScaleWidth,img.width);
             imageScale = imageScaleWidth/img.width;
+            //alert(imageScale + " " + img.width + " " +imageScaleWidth);
             canvas.width = imageScaleWidth;
             canvas.height = imageScaleWidth * img.height / img.width;
             ctx.drawImage(img,0,0,imageScaleWidth,imageScaleWidth * img.height / img.width);
