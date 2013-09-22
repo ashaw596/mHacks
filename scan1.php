@@ -80,11 +80,11 @@
 <?php
     require_once("classes/ImageFile.php");
 	require_once("classes/Point.php");
-	require_once("classes/MonteCarlo.php");
+	require_once("classes/GeneralAreaFinding.php");
     
     $skinX[0]=$_POST["skinX0"];
     $skinY[0]=$_POST["skinY0"];
-    for($i=1;$i<=3;$i++)
+    for($i=1;$i<=1;$i++)
     {
         if(isset($_POST["skinX".$i]))
         {
@@ -129,27 +129,18 @@
             $imageY = $imageFile -> y;
             
             
-			$normalSkin = new Point($skinX[0], $skinY[0]);
-			$firstDegBurn = new Point($skinX[1], $skinY[1]);
-			$secondDegBurn = new Point($skinX[2], $skinY[2]);
-			$thirdDegBurn = new Point($skinX[3], $skinY[3]);
-			$calibration1 = new Point($calX[0], $calY[0]);
+			$normal = new Point($skinX[0], $skinY[0]);
+			$question = new Point($skinX[1], $skinY[1]);
+            $calibration1 = new Point($calX[0], $calY[0]);
 			$calibration2 = new Point($calX[1], $calY[1]);
 
 
-			$monteCarlo = new MonteCarlo();
-    
-			$monteCarlo->setImageToUse($image);
-            $monteCarlo->setWhichOnes($isEnabled);
-			$monteCarlo->setCalibration($calibration1, $calibration2, $calibrationLength);
-			$monteCarlo->setNormalSkinPoint($normalSkin);
-			$monteCarlo->setFirstDegPoint($firstDegBurn);
-			$monteCarlo->setSecondDegPoint($secondDegBurn);
-			$monteCarlo->setThirdDegPoint($thirdDegBurn);
-			$firstDegreeAnswer = $monteCarlo->getFirstDegreeArea();
-			$secondDegreeAnswer = $monteCarlo->getSecondDegreeArea();
-			$thirdDegreeAnswer = $monteCarlo->getThirdDegreeArea();
-			$totalDegreeAnswer = $monteCarlo->getTotalBurnArea();
+			$areaFinder = new GeneralAreaFinding($normal,$question,$image);
+
+			$areaFinder->setCalibration($calibration1, $calibration2, $calibrationLength);
+			
+            
+			$answer = $areaFinder->getTotalArea();
 			
 			ob_start();
             imagepng($image);
@@ -183,20 +174,13 @@
  					<td> <img src="<?php echo 'data:image/png;base64,'.base64_encode($imagedata) ;?>" alt="burn image" align="center" style="max-width: 500px;"> </td>
  					<td> <p>Here are the areas of your burn according to the photo uploaded.</p>
 
- 						<span class="label label-success">Area of 1st Degree Burn:</span> 
+ 						<span class="label label-success">Area of texture:</span> 
                         <br />
-                        <?php echo round($firstDegreeAnswer,2);?> cm<sup>2</sup>
+                        <?php echo round($answer,2);?> cm<sup>2</sup>
 			
 			
  						</br></br></br>
- 						<span class="label label-warning">Area of 2nd Degree Burn:</span> 
-                        <br />
-                        <?php echo round($secondDegreeAnswer,2); ?> cm<sup>2</sup>
- 						</br></br></br>
- 						<span class="label label-danger">Area of 3rd Degree Burn:</span> 
-                        <br />
-                        <?php echo round($thirdDegreeAnswer,2);?> cm<sup>2</sup>
-                        <br />
+ 						
  					</td> 
  				</tr>
  			</table>

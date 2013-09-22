@@ -85,7 +85,7 @@ class MonteCarlo{
 	 
 	public function getFirstDegreeArea() {
 		$this->getSquare();
-		$this->firstDegBurnArea = ($this->firstDegList*$this->squareArea)/$this->numOfPixelsInSquare;
+        $this->firstDegBurnArea = ($this->firstDegList*$this->squareArea)/$this->numOfPixelsInSquare;
 		if($this->whichOnes[0] == false){
 			return 'No first degree burns were selected';
 		}
@@ -124,6 +124,7 @@ class MonteCarlo{
 		
 	
 	private function seeWhereDiffBurnsAre(){
+        $allowance=40;
 		$firstX = $this->pointOfFirstDegBurn->getX();
 		$firstY = $this->pointOfFirstDegBurn->getY();		
 		$pixelOfFirstDeg = imagecolorat($this->imagefile , $firstX, $firstY);
@@ -146,16 +147,18 @@ class MonteCarlo{
 		$thirdDegRed = ($pixelOfThirdDeg >> 16) & 0xFF;
 		$thirdDegGreen= ($pixelOfThirdDeg >> 8) & 0xFF;
 		$thirdDegBlue = $pixelOfThirdDeg & 0xFF;
-		
+		$this->firstDegList =0;
+        $this->secondDegList =0;
+        $this->thirdDegList =0;
 		for ($x=0; $x<=$this->imageXCoord -1; $x++){
 			for ($y=0; $y<=$this->imageYCoord - 1; $y++){
 				$aPixel = imagecolorat($this->imagefile , $x, $y);
 				$red = ($aPixel >> 16) & 0xFF;
 				$green = ($aPixel >> 8) & 0xFF;
 				$blue =  $aPixel & 0xFF;
- 				if($red <= $firstDegRed + 20 && $red >= $firstDegRed - 20){
-					if($green <= $firstDegGreen + 20 && $green >= $firstDegGreen - 20){
-						if($blue <= $firstDegBlue + 20 && $blue >= $firstDegBlue - 20){
+ 				if($red <= $firstDegRed + $allowance && $red >= $firstDegRed - $allowance){
+					if($green <= $firstDegGreen + $allowance && $green >= $firstDegGreen - $allowance){
+						if($blue <= $firstDegBlue + $allowance && $blue >= $firstDegBlue - $allowance){
 							$this->firstDegList = $this->firstDegList + 1;
 							if($x < $this->leftMostXCoord){
 								$this->leftMostXCoord = $x;
@@ -172,9 +175,9 @@ class MonteCarlo{
 						}		
 					}
 				}
-				if($red <= $secondDegRed + 20 && $red >= $secondDegRed - 20){
-					if($green <= $secondDegGreen + 20 && $green >= $secondDegGreen - 20){
-						if($blue <= $secondDegBlue + 20 && $blue >= $secondDegBlue - 20){
+				if($red <= $secondDegRed + $allowance && $red >= $secondDegRed - $allowance){
+					if($green <= $secondDegGreen + $allowance && $green >= $secondDegGreen - $allowance){
+						if($blue <= $secondDegBlue + $allowance && $blue >= $secondDegBlue - $allowance){
 							$this->secondDegList = $this->secondDegList + 1;
 							if($x < $this->leftMostXCoord){
 								$this->leftMostXCoord = $x;
@@ -191,9 +194,9 @@ class MonteCarlo{
 						}
 					}
 				}
-				if($red <= $thirdDegRed + 20 && $red >= $thirdDegRed - 20){
-					if($green <= $thirdDegGreen + 20 && $green >= $thirdDegGreen - 20){
-						if($blue <= $thirdDegBlue + 20 && $blue >= $thirdDegBlue - 20){
+				if($red <= $thirdDegRed + $allowance && $red >= $thirdDegRed - $allowance){
+					if($green <= $thirdDegGreen + $allowance && $green >= $thirdDegGreen - $allowance){
+						if($blue <= $thirdDegBlue + $allowance && $blue >= $thirdDegBlue - $allowance){
 							$this->thirdDegList = $this->thirdDegList + 1;
 							if($x < $this->leftMostXCoord){
 								$this->leftMostXCoord = $x;
