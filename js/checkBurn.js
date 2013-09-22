@@ -3,6 +3,7 @@ $(function() {
 
 	
 });
+var burnImage;
 var headerHeight = 0;
 var imageScaleWidth = 500;
 var imageScale;
@@ -10,7 +11,11 @@ var img = new Image();
 var imageLoader = document.getElementById('imageLoader');
     imageLoader.addEventListener('change', handleImage, false);
 var canvas = document.getElementById('imageCanvas');
+var canvasColors = document.getElementById('colorPalette');
+canvasColors.width=100;
+canvasColors.height=100;
 var ctx = canvas.getContext('2d');
+var paletteContext = canvasColors.getContext('2d');
 var setting = 0;
 var skinX = new Array();
 var skinY = new Array();
@@ -56,86 +61,12 @@ function draw(event) {
 		ctx.clearRect(0,0,canvas.width,canvas.height);
 	}
 function start(event) {
-    
-   // startx = getX(event);
-   // starty = getY(event);
-   
-   switch (setting)
-    {
-        case 0:
-        ctx.strokeStyle = "black";
-        break;
-        case 1:
-        ctx.strokeStyle = "purple";
-        case 2:
-        ctx.strokeStyle = "red";
-        break;
-        case 3:
-        ctx.strokeStyle = "blue";
-        break;
-        case 4:
-        ctx.strokeStyle = "green";
-        break;
-        case 5:
-        ctx.strokeStyle = "orange";
-        break;
-        default:
-        break;
-    }
-    if (setting==0)
-    {  
-        
-        calX[setting] = getX(event);
-        calY[setting] = getY(event);
-        $("#calX" + setting).val(calX[setting] / imageScale );
-        $("#calY" + setting).val(calY[setting] / imageScale );
-       
-        ctx.beginPath();
-        ctx.arc(calX[setting],calY[setting],2,0,2*Math.PI);
-        ctx.stroke();
-        
-        
-        ctx.beginPath();
-        ctx.moveTo(calX[setting],calY[setting]);
-    }
-    else if (setting==1)
-    {
-        calX[setting] = getX(event);
-        calY[setting] = getY(event);
-        $("#calX" + setting).val(calX[setting] / imageScale );
-        $("#calY" + setting).val(calX[setting] / imageScale );
-        ctx.lineTo(calX[setting],calY[setting]);
-        ctx.stroke();
-        
-        ctx.strokeStyle = "gray";
-        ctx.beginPath();
-        ctx.arc(calX[setting],calY[setting],2,0,2*Math.PI);
-        ctx.stroke();
-    }
-    else if(setting<6)
-    {
-        var i = setting - 2;
-        while(isEnabled[i]==false)
-        {
-            setting++;
-            i = setting - 2;
-        }
-        if(i<4)
-        {
-            skinX[i] = getX(event);
-            skinY[i] = getY(event);
-            $("#skinX" + i).val(skinX[i] / imageScale );
-            $("#skinY" + i).val(skinY[i] / imageScale );
-
-            ctx.beginPath();
-            ctx.arc(skinX[i],skinY[i],10,0,2*Math.PI);
-            ctx.stroke();
-          
-            isDrawing = true;
-        }
-    }
-   
-    setting++;
+    var x =getX(event);
+    var y = getY(event);
+    var color = burnImage.takeAverage(x,y);
+    paletteContext.fillStyle="rgba("+Math.round(color["r"])+"," +Math.round(color["g"])+","+Math.round(color["b"])+"," +Math.round(color["a"])+")";
+    paletteContext.fillRect(0,0,100,100);
+    $("#isBurn").html(burnImage.isBurn(x,y) + "<br />"  + "rgba("+Math.round(color["r"])+"," +Math.round(color["g"])+","+Math.round(color["b"])+"," +Math.round(color["a"])+")");
     event.preventDefault();
 }
 function stop(event) {
@@ -148,10 +79,6 @@ function stop(event) {
     event.preventDefault();
 }
 function init() {
-    for(var i = 0; i<4;i++)
-    {
-        isEnabled[i]=true;
-    }
 
     canvas.addEventListener("touchstart",start,false);
     canvas.addEventListener("touchmove",draw,false);
@@ -165,7 +92,7 @@ function init() {
 function getX(event) {
     
 		if(event.type.contains("touch")) {
-			return event.targetTouches[0].pageX-$("#imageCanvas").offset().left;
+			return event.targetTouches[0].pageX-canvas.position().left;
 		}
 		else {
 			return event.layerX;
@@ -175,7 +102,7 @@ function getX(event) {
 function getY(event) {
  
     if(event.type.contains("touch")) {
-        return event.targetTouches[0].pageY-$("#imageCanvas").offset().top;
+        return event.targetTouches[0].pageY-canvas.position().top;
     }
     else {
        return event.layerY;
@@ -192,7 +119,7 @@ function handleImage(e){
             canvas.width = imageScaleWidth;
             canvas.height = imageScaleWidth * img.height / img.width;
             ctx.drawImage(img,0,0,imageScaleWidth,imageScaleWidth * img.height / img.width);
-            
+            burnImage = new BurnImage(ctx);
         }
         img.src = event.target.result;
     }
