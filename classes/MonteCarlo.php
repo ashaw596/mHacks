@@ -124,7 +124,7 @@ class MonteCarlo{
 		
 	
 	private function seeWhereDiffBurnsAre(){
-        $allowance=40;
+        $allowance=30;
 		$firstX = $this->pointOfFirstDegBurn->getX();
 		$firstY = $this->pointOfFirstDegBurn->getY();		
 		$pixelOfFirstDeg = imagecolorat($this->imagefile , $firstX, $firstY);
