@@ -182,7 +182,7 @@ function getX(event) {
 			return event.targetTouches[0].pageX-$("#imageCanvas").offset().left;
 		}
 		else {
-			return event.layerX;
+			return event.layerX-$("#imageCanvas").offset().left;
 		}
 	}
 	
@@ -192,7 +192,7 @@ function getY(event) {
         return event.targetTouches[0].pageY-$("#imageCanvas").offset().top;
     }
     else {
-       return event.layerY;
+       return event.layerY - $("#imageCanvas").offset().top;
     }
 }
 function handleImage(e){
