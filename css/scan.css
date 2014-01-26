@@ -12,6 +12,8 @@
 }
 #instructions
 {
+	color:red;
+	font-size: 1em;
     width: 500px;
     height: 160px;
 }
