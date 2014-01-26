@@ -86,7 +86,7 @@
     $skinY[0]=$_POST["skinY0"];
     for($i=1;$i<=1;$i++)
     {
-        if(isset($_POST["skinX".$i]))
+        if(isset($_POST["skinX".$i])&&(!empty($_POST["skinX".$i])))
         {
             $skinX[$i]=$_POST["skinX".$i];
             $skinY[$i]=$_POST["skinY".$i];

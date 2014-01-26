@@ -89,9 +89,9 @@ function start(event) {
         calY[setting] = getY(event);
         $("#calX" + setting).val(Math.round(calX[setting] / imageScale ));
         $("#calY" + setting).val(Math.round(calY[setting] / imageScale ));
-       
+       ctx.strokeStyle = "orange";
         ctx.beginPath();
-        ctx.arc(calX[setting],calY[setting],2,0,2*Math.PI);
+        ctx.arc(calX[setting],calY[setting],4,0,2*Math.PI);
         ctx.stroke();
         
         
@@ -109,7 +109,7 @@ function start(event) {
         
         ctx.strokeStyle = "gray";
         ctx.beginPath();
-        ctx.arc(calX[setting],calY[setting],2,0,2*Math.PI);
+        ctx.arc(calX[setting],calY[setting],4,0,2*Math.PI);
         ctx.stroke();
         $("#instructions").html("Please click a spot on the picture with normal skin.");
     }
@@ -182,7 +182,7 @@ function getX(event) {
 			return event.targetTouches[0].pageX-$("#imageCanvas").offset().left;
 		}
 		else {
-			return event.layerX-$("#imageCanvas").offset().left;
+			return event.layerX;
 		}
 	}
 	
@@ -192,7 +192,7 @@ function getY(event) {
         return event.targetTouches[0].pageY-$("#imageCanvas").offset().top;
     }
     else {
-       return event.layerY - $("#imageCanvas").offset().top;
+       return event.layerY;
     }
 }
 function handleImage(e){
@@ -204,7 +204,7 @@ function handleImage(e){
             imageScaleWidth = 500
             imageScaleWidth = Math.min(imageScaleWidth,img.width);
             imageScale = imageScaleWidth/img.width;
-            canvas.width = imageScaleWidth;
+            canvas.width = 500;
             canvas.height = imageScaleWidth * img.height / img.width;
             ctx.drawImage(img,0,0,imageScaleWidth,imageScaleWidth * img.height / img.width);
             $('#imageLoader').hide();

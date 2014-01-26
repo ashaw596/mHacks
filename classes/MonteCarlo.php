@@ -26,6 +26,7 @@ class MonteCarlo{
 	 private $squareArea;
 	 private $numOfPixelsInSquare;
 	 private $whichOnes;
+	 private $jumpX = 1;
 	
 
 	 
@@ -33,6 +34,10 @@ class MonteCarlo{
 		$this->imagefile = $anImage;
 		$this->imageXCoord = imagesx($anImage);
 		$this->imageYCoord = imagesy($anImage);
+		$this->leftMostXCoord = 0;
+		$this->topMostYCoord = 0;
+		$this->rightMostXCoord = $this->imageXCoord;
+		$this->bottomMostYCoord = $this->imageYCoord;
    }
    
 	public function setWhichOnes($booleanArray){
@@ -67,9 +72,9 @@ class MonteCarlo{
 
 
    public function getTotalBurnArea() {
-	 	$fromFirst = $this->getFirstDegreeArea(); 
-		$fromSecond = $this->getSecondDegreeArea();
-		$fromThird = $this->getThirdDegreeArea();
+	 	$fromFirst = $this->firstDegBurnArea; 
+		$fromSecond = $this->secondDegBurnArea;
+		$fromThird = $this->thirdDegBurnArea;
 		if (is_numeric($fromFirst)) {
 			$this->totalBurn = $this->totalBurn + $fromFirst;
 		}
@@ -84,7 +89,6 @@ class MonteCarlo{
 	 
 	 
 	public function getFirstDegreeArea() {
-		$this->getSquare();
         $this->firstDegBurnArea = ($this->firstDegList*$this->squareArea)/$this->numOfPixelsInSquare;
 		if($this->whichOnes[0] == false){
 			return 'No first degree burns were selected';
@@ -110,14 +114,29 @@ class MonteCarlo{
 	
 	 
 	
-	private function getSquare(){
-		$this->seeWhereDiffBurnsAre();
+	public function getSquare(){
 		$width = $this->rightMostXCoord - $this->leftMostXCoord;
 		$length = $this->bottomMostYCoord - $this->topMostYCoord;
 		$magOfWidth = $this->magnitude*$width/$this->calibrationStick;
 		$magOfLength = $this->magnitude*$length/$this->calibrationStick;
 		$this->squareArea = $magOfLength * $magOfWidth;
 		$this->numOfPixelsInSquare = $width*$length;
+		$this->jumpX = 1;
+		$this->jumpY = 1;
+		
+		while(($this->numOfPixelsInSquare / $this->jumpX / $this->jumpY) > 600000) {
+			$this->jumpX += 1;
+			if(($this->numOfPixelsInSquare / $this->jumpX / $this->jumpY) > 600000) {
+				$this->jumpY += 1;
+			} else {
+				break;
+			}
+		}
+		echo $this->jumpX . " " . $this->jumpY;
+		$this->numOfPixelsInSquare = ($this->numOfPixelsInSquare / $this->jumpX / $this->jumpY);
+		$this->seeWhereDiffBurnsAre();
+		
+		
 	}
 
 
@@ -150,8 +169,8 @@ class MonteCarlo{
 		$this->firstDegList =0;
         $this->secondDegList =0;
         $this->thirdDegList =0;
-		for ($x=0; $x<=$this->imageXCoord -1; $x++){
-			for ($y=0; $y<=$this->imageYCoord - 1; $y++){
+		for ($x=0; $x<=$this->imageXCoord -1; $x += $this->jumpX){
+			for ($y=0; $y<=$this->imageYCoord - 1; $y += $this->jumpY){
 				$aPixel = imagecolorat($this->imagefile , $x, $y);
 				$red = ($aPixel >> 16) & 0xFF;
 				$green = ($aPixel >> 8) & 0xFF;
@@ -160,18 +179,6 @@ class MonteCarlo{
 					if($green <= $firstDegGreen + $allowance && $green >= $firstDegGreen - $allowance){
 						if($blue <= $firstDegBlue + $allowance && $blue >= $firstDegBlue - $allowance){
 							$this->firstDegList = $this->firstDegList + 1;
-							if($x < $this->leftMostXCoord){
-								$this->leftMostXCoord = $x;
-							}
-							if($x > $this->rightMostXCoord){
-								$this->rightMostXCoord = $x;
-							}
-							if($y < $this->topMostYCoord){
-								$this->topMostYCoord = $y;
-							}
-							if($y > $this->bottomMostYCoord){
-								$this->bottomMostYCoord = $y;
-							}
 						}		
 					}
 				}
@@ -179,18 +186,6 @@ class MonteCarlo{
 					if($green <= $secondDegGreen + $allowance && $green >= $secondDegGreen - $allowance){
 						if($blue <= $secondDegBlue + $allowance && $blue >= $secondDegBlue - $allowance){
 							$this->secondDegList = $this->secondDegList + 1;
-							if($x < $this->leftMostXCoord){
-								$this->leftMostXCoord = $x;
-							}
-							if($x > $this->rightMostXCoord){
-								$this->rightMostXCoord = $x;
-							}
-							if($y < $this->topMostYCoord){
-								$this->topMostYCoord = $y;
-							}
-							if($y > $this->bottomMostYCoord){
-								$this->bottomMostYCoord = $y;
-							}
 						}
 					}
 				}
@@ -198,18 +193,6 @@ class MonteCarlo{
 					if($green <= $thirdDegGreen + $allowance && $green >= $thirdDegGreen - $allowance){
 						if($blue <= $thirdDegBlue + $allowance && $blue >= $thirdDegBlue - $allowance){
 							$this->thirdDegList = $this->thirdDegList + 1;
-							if($x < $this->leftMostXCoord){
-								$this->leftMostXCoord = $x;
-							}
-							if($x > $this->rightMostXCoord){
-								$this->rightMostXCoord = $x;
-							}
-							if($y < $this->topMostYCoord){
-								$this->topMostYCoord = $y;
-							}
-							if($y > $this->bottomMostYCoord){
-								$this->bottomMostYCoord = $y;
-							}
 						}
 					}
 				}				

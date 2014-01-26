@@ -86,7 +86,7 @@
     $skinY[0]=$_POST["skinY0"];
     for($i=1;$i<=3;$i++)
     {
-        if(isset($_POST["skinX".$i]))
+        if(isset($_POST["skinX".$i])&&(!empty($_POST["skinX".$i])))
         {
             $skinX[$i]=$_POST["skinX".$i];
             $skinY[$i]=$_POST["skinY".$i];
@@ -146,10 +146,29 @@
 			$monteCarlo->setFirstDegPoint($firstDegBurn);
 			$monteCarlo->setSecondDegPoint($secondDegBurn);
 			$monteCarlo->setThirdDegPoint($thirdDegBurn);
+			$monteCarlo->getSquare();
 			$firstDegreeAnswer = $monteCarlo->getFirstDegreeArea();
 			$secondDegreeAnswer = $monteCarlo->getSecondDegreeArea();
 			$thirdDegreeAnswer = $monteCarlo->getThirdDegreeArea();
 			$totalDegreeAnswer = $monteCarlo->getTotalBurnArea();
+			
+			if($isEnabled[0]) {
+				$firstDegreeAnswer = round($firstDegreeAnswer,2) . "cm<sup>2</sup>";
+			} else {
+				$firstDegreeAnswer = "Disabled";
+			}
+			if($isEnabled[1]) {
+				$secondDegreeAnswer = round($secondDegreeAnswer,2) . "cm<sup>2</sup>";
+			} else {
+				$secondDegreeAnswer = "Disabled";
+			}
+			if($isEnabled[2]) {
+				$thirdDegreeAnswer = round($thirdDegreeAnswer,2) . "cm<sup>2</sup>";
+			} else {
+				$thirdDegreeAnswer = "Disabled";
+			}
+			
+			
 			
 			ob_start();
             imagepng($image);
@@ -185,17 +204,15 @@
 
  						<span class="label label-success">Area of 1st Degree Burn:</span> 
                         <br />
-                        <?php echo round($firstDegreeAnswer,2);?> cm<sup>2</sup>
-			
-			
+                        <?php echo $firstDegreeAnswer;?> 
  						</br></br></br>
  						<span class="label label-warning">Area of 2nd Degree Burn:</span> 
                         <br />
-                        <?php echo round($secondDegreeAnswer,2); ?> cm<sup>2</sup>
+                        <?php echo $secondDegreeAnswer; ?>
  						</br></br></br>
  						<span class="label label-danger">Area of 3rd Degree Burn:</span> 
                         <br />
-                        <?php echo round($thirdDegreeAnswer,2);?> cm<sup>2</sup>
+                        <?php echo $thirdDegreeAnswer;?>
                         <br />
  					</td> 
  				</tr>
