@@ -132,7 +132,7 @@ class MonteCarlo{
 				break;
 			}
 		}
-		echo $this->jumpX . " " . $this->jumpY;
+		//echo $this->jumpX . " " . $this->jumpY;
 		$this->numOfPixelsInSquare = ($this->numOfPixelsInSquare / $this->jumpX / $this->jumpY);
 		$this->seeWhereDiffBurnsAre();
 		
