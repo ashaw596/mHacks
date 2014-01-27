@@ -13,8 +13,8 @@
  <body>
  	<div class="container">
     <div class="masthead">
-      <img src="img/facebooklogo.jpg" height="40" align="right">
-      <img src="img/twitterlogo.jpg" height="40" align="right">
+      <a href="http://www.facebook.com/burnizer"><img src="img/facebooklogo.jpg" height="40" align="right"></a>
+      <a href="https://twitter.com/Burnizer"><img src="img/twitterlogo.jpg" height="40" align="right"></a>
       <img src="img/rsslogo.png" height="40" align="right">
       <h1> Burnize </h1> 
       <ul class="nav nav-justified">
