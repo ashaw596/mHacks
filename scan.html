@@ -43,32 +43,31 @@
         
          <div class="modal-body">
     <!-- The async form to send and replace the modals content with its response -->
-    <form class="form-horizontal well" data-async data-target="#rating-modal" action="/some-endpoint" method="POST">
+	<form method="POST" action="sendMail.php" id="contact">
      
                     <label for="name">Name</label>
                     <input type="text" value="" name="name">
                     <label for="email">Email</label>
-                    <input type="text" value="@" name="email">
+                    <input type="text" value="" name="email">
                     
     </br></br>
                     
     <fieldset>
-    <form method="POST" action=""></form>
     <label  for="phone">Phone </label>
     <span>
       <input name="phonenumber"  size="3" maxlength="3" value="" type="text"> -
       <label for="">(###)</label>
     </span>
     <span>
-      <input id="phonenumber2"  class="element text" size="3" maxlength="3" value="" type="text"> -
+      <input name="phonenumber2"  class="element text" size="3" maxlength="3" value="" type="text"> -
       <label for="element_4_2">###</label>
     </span>
     <span>
-      <input id="phonenumber3"  class="element text" size="4" maxlength="4" value="" type="text">
+      <input name="phonenumber3"  class="element text" size="4" maxlength="4" value="" type="text">
       <label for="element_4_3">####</label>
       </br></br>
       <h4>Leave your feedback!</h4>
-      <textarea class="form-control" rows="3"></textarea>
+      <textarea name="message" class="form-control" rows="3"></textarea>
       </fieldset>
 
     </form>
@@ -77,7 +76,7 @@
         
         <div class="modal-footer">
           <a href="#" data-dismiss="modal" class="btn">Close</a>
-          <a href="#" class="btn btn-primary">Save changes</a>
+          <a href="#" class="btn btn-primary" onClick='document.getElementById("contact").submit();'>Send Feedback</a>
         </div>
       </div>
     </div>
